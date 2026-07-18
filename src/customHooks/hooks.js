@@ -39,6 +39,7 @@ export function taskProcessor(task, search, activeFilter, activeSort, setFiltere
         }
     }
     setTotalPages(Math.ceil(processedData.length / 8))
+    processedData = processedData.toReversed()
     processedData = processedData.slice(startIndex, endIndex)
     setFilteredData(processedData);
 }
