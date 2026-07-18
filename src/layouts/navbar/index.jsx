@@ -10,7 +10,7 @@ const Index = () => {
       <div className="navbar-brand">
         <h1>TaskMaster</h1>
         <div className='brand-logo'>
-          <div><i class="bi bi-check2-circle"></i></div>
+          <div><i className="bi bi-check2-circle"></i></div>
           TM
         </div>
       </div>

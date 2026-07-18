@@ -4,7 +4,17 @@ import { Link, useNavigate } from 'react-router-dom';
 import './style.css';
 
 const Index = () => {
-  const navigate = useNavigate()
+  const storedDetails = localStorage.getItem('userDetails');
+  const navigate = useNavigate();
+
+  if (storedDetails) {
+    const user = JSON.parse(storedDetails);
+
+    if (user.email !== 'user@gmail.com') {
+      localStorage.removeItem('task');
+    }
+  }
+
   return (
     <div className="login-wrapper">
       <div className="login-card">
@@ -14,13 +24,13 @@ const Index = () => {
         <h1 className="title">Welcome Back</h1>
         <p className="subtitle">Log in to TaskMaster</p>
 
-        <form onSubmit={(e)=>handleLoginSubmit(e,navigate)}>
+        <form onSubmit={(e) => handleLoginSubmit(e, navigate)}>
           <div className="form-group">
             <label className="form-label" htmlFor="email">Email Address</label>
             <div className="input-container">
               <i className="bi bi-envelope input-icon"></i>
               <input
-              name='email'
+                name='email'
                 type="email"
                 id="email"
                 className="login-input"
@@ -34,7 +44,7 @@ const Index = () => {
             <div className="input-container">
               <i className="bi bi-lock input-icon"></i>
               <input
-              name='password'
+                name='password'
                 type="password"
                 id="password"
                 className="login-input"
