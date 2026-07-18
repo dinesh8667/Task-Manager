@@ -28,7 +28,7 @@ const Index = () => {
   return (
     <div className="dashboard-wrapper">
       <header className="dashboard-header">
-        <h1 className="dashboard-title">Hello {JSON.parse(userDetails).name}!</h1>
+        <h1 className="dashboard-title">{isLogIn && userDetails ? `Hello ${JSON.parse(userDetails).name}!` : "Dashboard"}</h1>
         <p className="dashboard-subtitle">Overview of your current workspace and tasks.</p>
       </header>
 

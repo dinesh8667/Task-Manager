@@ -7,7 +7,7 @@ const index = () => {
   return (
     <div className='error-page'>
         <img src="page-not-found.png" alt="page-not-found" />
-        <button onClick={()=>navigate('/')}><i class="bi bi-arrow-left"></i> Back to Dashboard</button>
+        <button onClick={()=>navigate('/')}><i className="bi bi-arrow-left"></i> Back to Dashboard</button>
     </div>
   )
 }
