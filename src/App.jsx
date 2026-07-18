@@ -9,6 +9,7 @@ import Dashboard from './pages/dashboard'
 import Create from './pages/create'
 import Edit from './pages/edit'
 import Profile from './pages/profile'
+import NotFound from './pages/notFound'
 
 function App() {
   return (
@@ -39,6 +40,7 @@ function App() {
             <Profile />
           </PrivateRouter>
         } />
+        <Route path='*' element={<NotFound/>}/>
       </Routes>
     </BrowserRouter>
   )

@@ -38,7 +38,7 @@ const Index = () => {
             <span className="stat-title">Total Tasks</span>
             <i className="bi bi-file-earmark-text stat-icon"></i>
           </div>
-          <div className="stat-value">{task?.length}</div>
+          <div className="stat-value">{isLogIn ? task?.length : 0}</div>
         </div>
 
         <div className="stat-card">
@@ -46,7 +46,7 @@ const Index = () => {
             <span className="stat-title">Completed</span>
             <i className="bi bi-patch-check stat-icon"></i>
           </div>
-          <div className="stat-value">{task?.filter((item) => item.status === 'Completed').length}</div>
+          <div className="stat-value">{isLogIn ? task?.filter((item) => item.status === 'Completed').length : 0}</div>
         </div>
 
         <div className="stat-card">
@@ -54,7 +54,7 @@ const Index = () => {
             <span className="stat-title">Pending</span>
             <i className="bi bi-exclamation-octagon stat-icon"></i>
           </div>
-          <div className="stat-value">{task?.filter((item) => item.status === 'Pending').length}</div>
+          <div className="stat-value">{isLogIn ? task?.filter((item) => item.status === 'Pending').length : 0}</div>
         </div>
 
         <div className="stat-card">
@@ -62,7 +62,7 @@ const Index = () => {
             <span className="stat-title">High Priority</span>
             <i className="bi bi-exclamation-triangle stat-icon"></i>
           </div>
-          <div className="stat-value">{task?.filter((item) => item.priority === 'High').length}</div>
+          <div className="stat-value">{isLogIn ? task?.filter((item) => item.priority === 'High').length : 0}</div>
         </div>
       </div>
 
@@ -138,7 +138,7 @@ const Index = () => {
 
         <div className="tasks-list">
           {
-            !isLogIn ? <h2>Login to access</h2> : filterdData.length === 0 ? <h2>0 tasks found</h2> :
+            !isLogIn ? <h2 className='center-text'>LogIn to get access</h2> : filterdData.length === 0 ? <h2 className='center-text'>0 tasks found</h2> :
               (filterdData?.map((item) => {
                 return (
                   <div className={`task-row ${item.status === 'Completed' ? 'completed' : ''}`} key={item.id}>
