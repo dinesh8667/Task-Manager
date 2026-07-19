@@ -16,7 +16,7 @@ To save you time during the review process, you do not need to manually register
 
 * **Email:** `user@gmail.com`
 
-* **Password:** `password123`
+* **Password:** `12345678`
 
 
 *(Alternatively, you are fully welcome to test the registration flow by creating a new account on the Sign Up page with any user credentials).*

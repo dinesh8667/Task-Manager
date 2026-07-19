@@ -28,8 +28,8 @@ export function taskProcessor({task, search, activeFilter, activeSort, setFilter
     if (activeSort) {
         const [category, value] = activeSort.split('-');
         if (category === 'date') {
-            processedData = value === 'old' ? processedData.sort((a, b) => a.date.localeCompare(b.date)) :
-                processedData.sort((a, b) => b.date.localeCompare(a.date))
+            processedData = value === 'old' ? processedData.sort((a, b) => b.date.localeCompare(a.date)) :
+                processedData.sort((a, b) => a.date.localeCompare(b.date))
         } else if (category === 'priority') {
             processedData = value === 'low' ? processedData.sort((a, b) => priorityWeights[a.priority] - priorityWeights[b.priority]) :
                 processedData.sort((a, b) => priorityWeights[b.priority] - priorityWeights[a.priority])
