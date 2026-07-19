@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react';
-import { InitialTask } from '../../services';
 import { taskProcessor, handleStatusChange, handleRemove } from '../../customHooks/hooks';
 import { useNavigate } from 'react-router-dom';
 import './style.css';
@@ -9,21 +8,17 @@ const Index = () => {
   const userDetails = localStorage.getItem('userDetails')
   const storedtask = localStorage.getItem('task')
   const [task, setTask] = useState(storedtask ? JSON.parse(storedtask) : []);
-  const [filterdData, setFilteredData] = useState([]);
+  const [filteredData, setFilteredData] = useState([]);
   const [search, setSearch] = useState("");
   const [activeSort, setActiveSort] = useState("");
   const [activeFilter, setActiveFilter] = useState("");
   const [currentPage, setCurrentPage] = useState(1);
-  const [totalPages, setTotalPages] = useState()
+  const [totalPages, setTotalPages] = useState(1)
   const navigate = useNavigate();
 
   useEffect(() => {
-    taskProcessor(task, search, activeFilter, activeSort, setFilteredData, setTotalPages, currentPage)
+    taskProcessor({task, search, activeFilter, activeSort, setFilteredData, setTotalPages, currentPage})
   }, [search, activeSort, activeFilter, task, currentPage]);
-
-  function handleFilter(e) {
-    setSort({ ...filter, [e.target.name]: e.target.value })
-  };
 
   return (
     <div className="dashboard-wrapper">
@@ -138,12 +133,12 @@ const Index = () => {
 
         <div className="tasks-list">
           {
-            !isLogIn ? <h2 className='center-text'>LogIn to get access</h2> : filterdData.length === 0 ? <h2 className='center-text'>0 tasks found</h2> :
-              (filterdData?.map((item) => {
+            !isLogIn ? <h2 className='center-text'>LogIn to get access</h2> : filteredData.length === 0 ? <h2 className='center-text'>no tasks exist</h2> :
+              (filteredData?.map((item) => {
                 return (
                   <div className={`task-row ${item.status === 'Completed' ? 'completed' : ''}`} key={item.id}>
                     <div className="td-details">
-                      <input value={item.id} type="checkbox" className="task-checkbox" checked={item.status === 'Completed'} onChange={() => handleStatusChange(item.id, task, setTask)} />
+                      <input type="checkbox" className="task-checkbox" checked={item.status === 'Completed'} onChange={() => handleStatusChange(item.id, task, setTask)} />
                       <div className="task-info">
                         <span className="task-title">{item.title}</span>
                         <span className="task-desc">{item.description}</span>
@@ -173,11 +168,11 @@ const Index = () => {
         </div>
       </div>
       {
-        isLogIn && filterdData.length !== 0 &&
+        isLogIn && filteredData.length !== 0 &&
         <div className='pagination-container'>
-          <button onClick={()=>setCurrentPage(currentPage - 1)} disabled={currentPage === 1}><i className="bi bi-chevron-double-left"></i></button>
+          <button onClick={()=>setCurrentPage(prev => prev - 1)} disabled={currentPage === 1}><i className="bi bi-chevron-double-left"></i></button>
           <span>{currentPage} / {totalPages}</span>
-          <button onClick={()=>setCurrentPage(currentPage + 1)} disabled={currentPage === totalPages}><i className="bi bi-chevron-double-right"></i></button>
+          <button onClick={()=>setCurrentPage(prev => prev + 1)} disabled={currentPage === totalPages}><i className="bi bi-chevron-double-right"></i></button>
         </div>
       }
     </div>

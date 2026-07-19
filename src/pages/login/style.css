@@ -62,9 +62,10 @@
 .input-container {
   display: flex;
   align-items: center;
+  gap: 10px;
   border: 1px solid #e5e7eb;
   border-radius: 6px;
-  padding: 0 12px;
+  padding-left: 12px;
   transition: border-color 0.2s, box-shadow 0.2s;
 }
 
@@ -92,6 +93,13 @@
 
 .login-input::placeholder {
   color: #9ca3af;
+}
+
+.error-text {
+  display: block;
+  color: #4a74b5;
+  font-size: 0.85rem;
+  margin-top: 5px;
 }
 
 .submit-btn {

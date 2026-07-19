@@ -10,23 +10,25 @@ export async function hashPassword(password) {
         .join('');
 }
 
-export async function handleSignUpSubmit(e, navigate) {
-    e.preventDefault();
-    const formData = new FormData(e.currentTarget);
-    const userDetails = Object.fromEntries(formData);
+export async function handleSignUpSubmit(data, navigate) {
+    try {
+        const { name, email, password } = data;
 
-    if (userDetails.password) {
-        userDetails.password = await hashPassword(userDetails.password.trim());
+        let hashedPassword = password;
+        if (password) {
+            hashedPassword = await hashPassword(password.trim());
+        }
+
+        const userDetails = { name, email, password: hashedPassword };
+
+        localStorage.setItem('userDetails', JSON.stringify(userDetails));
+        navigate('/login');
+    } catch (error) {
+        alert("Sign up failed:", error);
     }
-
-    localStorage.setItem('userDetails', JSON.stringify(userDetails));
-    navigate('/login');
 }
 
-export async function handleLoginSubmit(e, navigate) {
-    e.preventDefault();
-    const formData = new FormData(e.currentTarget);
-    const loginDetails = Object.fromEntries(formData);
+export async function handleLoginSubmit(data, navigate) {
     const storedUserString = localStorage.getItem('userDetails');
 
     if (!storedUserString) {
@@ -35,9 +37,9 @@ export async function handleLoginSubmit(e, navigate) {
     }
 
     const storedUser = JSON.parse(storedUserString);
-    const hashedInputPassword = await hashPassword(loginDetails.password.trim());
+    const hashedInputPassword = await hashPassword(data.password.trim());
 
-    if (loginDetails.email === storedUser.email && hashedInputPassword === storedUser.password) {
+    if (data.email === storedUser.email && hashedInputPassword === storedUser.password) {
         localStorage.setItem('isLogIn', 'true');
         navigate('/dashboard');
     } else {
@@ -45,7 +47,7 @@ export async function handleLoginSubmit(e, navigate) {
         return;
     }
 
-    if (loginDetails.email === 'user@gmail.com') {
+    if (data.email === 'user@gmail.com') {
         const initialTasks = InitialTask()
         localStorage.setItem('task', JSON.stringify(initialTasks))
     }

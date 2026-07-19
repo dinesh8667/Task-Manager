@@ -1,5 +1,5 @@
 
-export function taskProcessor(task, search, activeFilter, activeSort, setFilteredData, setTotalPages, currentPage) {
+export function taskProcessor({task, search, activeFilter, activeSort, setFilteredData, setTotalPages, currentPage}) {
     let processedData = [...task];
     const priorityWeights = { High: 3, Medium: 2, Low: 1 };
     const today = new Date().toISOString().split('T')[0];

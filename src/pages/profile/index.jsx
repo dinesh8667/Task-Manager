@@ -35,19 +35,19 @@ const Index = () => {
         <div className="stats-grid">
           <div className="stat-box">
             <span className="stat-label">TASKS</span>
-            <span className="state-value">{task.length}</span>
+            <span className="state-value">{storedTask ? task.length : 0}</span>
           </div>
           <div className="stat-box">
             <span className="stat-label">COMPLETED</span>
-            <span className="state-value">{task?.filter((item) => item.status === 'Completed').length}</span>
+            <span className="state-value">{storedTask ? task?.filter((item) => item.status === 'Completed').length : 0}</span>
           </div>
           <div className="stat-box">
             <span className="stat-label">Pending</span>
-            <span className="state-value">{task?.filter((item) => item.status === 'Pending').length}</span>
+            <span className="state-value">{storedTask ? task?.filter((item) => item.status === 'Pending').length : 0}</span>
           </div>
           <div className="stat-box">
             <span className="stat-label">High Priority</span>
-            <span className="state-value">{task?.filter((item) => item.priority === 'High').length}</span>
+            <span className="state-value">{storedTask ? task?.filter((item) => item.priority === 'High').length : 0}</span>
           </div>
         </div>
       </div>
