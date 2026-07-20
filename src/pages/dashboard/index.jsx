@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { taskProcessor, handleStatusChange, handleRemove } from '../../customHooks/hooks';
+import { dateFormatter } from '../../utils';
 import { useNavigate } from 'react-router-dom';
 import './style.css';
 
@@ -152,7 +153,7 @@ const Index = () => {
                     <div className="td-priority">
                       <span className={`badge ${item.priority === 'Low' ? 'badge-low' : (item.priority === 'Medium' ? 'badge-medium' : 'badge-high')}`}>{item.priority}</span>
                     </div>
-                    <div className="td-date">{item.date}</div>
+                    <div className="td-date">{dateFormatter(item.date)}</div>
                     <div className="td-actions">
                       <button className="action-btn" onClick={() => navigate(`/edit/${item.id}`)}>
                         <i className="bi bi-pencil"></i>
